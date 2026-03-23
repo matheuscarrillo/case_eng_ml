@@ -1,3 +1,5 @@
 {
-  "body": "{\"data\": [{\"PassengerId\": 771, \"Pclass\": 3, \"Name\": \"Lievens, Mr. Rene Aime\", \"Sex\": \"male\", \"Age\": 24.0, \"SibSp\": 0, \"Parch\": 0, \"Ticket\": \"345781\", \"Fare\": 9.5, \"Cabin\": null, \"Embarked\": \"S\"}]}"
+  "httpMethod": "POST",
+  "path": "/sobreviventes",
+  "body": "{\"data\": [{\"PassengerId\": 771, \"Pclass\": 3, \"Name\": \"Teste\", \"Sex\": \"male\", \"Age\": 24, \"SibSp\": 0, \"Parch\": 0, \"Ticket\": \"123\", \"Fare\": 10, \"Cabin\": null, \"Embarked\": \"S\"},{\"PassengerId\": 771, \"Pclass\": 3, \"Name\": \"Teste\", \"Sex\": \"male\", \"Age\": 24, \"SibSp\": 0, \"Parch\": 0, \"Ticket\": \"123\", \"Fare\": 10, \"Cabin\": null, \"Embarked\": \"S\"}]}"
 }

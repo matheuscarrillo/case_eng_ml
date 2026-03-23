@@ -24,13 +24,31 @@
 2. Construção do pipeline do modelo
 3. Construção do código python para execução em lambda 
 4. Criação de imagem docker
-  - docker build -t model-lambda .
+  - docker buildx build --platform linux/amd64 -t ml-lambda --load .
 5. Teste da imagem:
   ```bash
-    docker run -p 9000:8080 model-lambda
+    docker run -p 9000:8080 ml-lambda
     
     # Teste da imagem em outro terminal.
-    curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d @event.json
+    curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations/sobreviventes" -d @event.json
   ```
-6. Entrendimento da OpenAPI 3.0 (Swagger)
+7. OpenAPI 3.0 (Swagger)
   - OpenAPI = “documento que explica exatamente como sua API funciona”
+  - Construção do yaml da API
+8. Construção dos métodos de chamada das API.
+9. Construção do Terraform de subida de lambda no ECR
+6. Subida de imagem no ECR.
+  - atualizar o aws configure
+  - aws ecr get-login-password --region sa-east-1 | docker login --username AWS --password-stdin 123687089814.dkr.ecr.sa-east-1.amazonaws.com
+  - cria o repositório via terraform:
+    - terraform init
+    - terraform apply -target=aws_ecr_repository.repo
+  - docker tag ml-lambda:latest 123687089814.dkr.ecr.sa-east-1.amazonaws.com/ml-lambda:latest
+  - docker push 123687089814.dkr.ecr.sa-east-1.amazonaws.com/ml-lambda:latest
+X. Subida do lambda via terraform
+  - terraform apply -target=aws_lambda_function.lambda
+
+  
+X. Criar ajuste do do código para escrever no dynamo cada chamada.
+11. Construção do Terraform de subida de Dynamo.
+10. Construção do Terraform de subida de API GetWay
