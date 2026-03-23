@@ -1,13 +1,17 @@
 [build-system]
-requires = ["setuptools>=64", "setuptools_scm>=8"]
+requires = ["setuptools==68"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "ml-model-titanic" 
 description = "Modelo para predição de sobreviventes"
 readme = "README.md"
-requires-python = ">=3.11"
-dynamic = ["dependencies", "version"]
+requires-python = "==3.11.*"
+dynamic = ["dependencies"]
+version = "0.1.0"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}

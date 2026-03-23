@@ -1,0 +1,156 @@
+openapi: 3.0.1
+
+info:
+  title: Projeto API Titanic
+  version: 1.0.0
+  description: Composição de uma API RESTful para previsão de sobrevivência dos passageiros do Titanic, utilizando AWS Lambda e API Gateway.
+
+paths:
+
+  /sobreviventes:
+    post:
+      summary: Cria previsão de sobrevivência
+      description: Recebe dados do passageiro e retorna a probabilidade de sobrevivência
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      PassengerId:
+                        type: integer
+                      Pclass:
+                        type: integer
+                      Name:
+                        type: string
+                      Sex:
+                        type: string
+                      Age:
+                        type: number
+                      SibSp:
+                        type: integer
+                      Parch:
+                        type: integer
+                      Ticket:
+                        type: string
+                      Fare:
+                        type: number
+                      Cabin:
+                        type: string
+                        nullable: true
+                      Embarked:
+                        type: string
+
+      responses:
+        "200":
+          description: Predição realizada com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  PassengerId:
+                    type: integer
+                  probabilidade_sobrevivencia:
+                    type: number
+
+        "400":
+          description: Requisição inválida
+
+        "500":
+          description: Erro interno
+
+      x-amazon-apigateway-integration:
+        uri: 
+          Fn::Sub: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations
+        httpMethod: POST
+        type: aws_proxy
+
+
+    get:
+      summary: Lista todos os sobreviventes avaliados
+      
+      responses:
+        "200":
+          description: Lista de passageiros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    PassengerId:
+                      type: integer
+                    probabilidade_sobrevivencia:
+                      type: number
+
+      x-amazon-apigateway-integration:
+        uri: 
+          Fn::Sub: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations
+        httpMethod: POST
+        type: aws_proxy
+
+
+  /sobreviventes/{id}:
+    get:
+      summary: Busca um passageiro pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        "200":
+          description: Passageiro encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  PassengerId:
+                    type: integer
+                  probabilidade_sobrevivencia:
+                    type: number
+
+        "404":
+          description: Passageiro não encontrado
+
+      x-amazon-apigateway-integration:
+        uri: 
+          Fn::Sub: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations
+        httpMethod: POST
+        type: aws_proxy
+
+
+    delete:
+      summary: Remove um passageiro pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        "200":
+          description: Passageiro removido
+
+        "404":
+          description: Passageiro não encontrado
+
+      x-amazon-apigateway-integration:
+        uri: 
+          Fn::Sub: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations
+        httpMethod: POST
+        type: aws_proxy

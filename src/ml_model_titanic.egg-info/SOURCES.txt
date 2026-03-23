@@ -1,8 +1,12 @@
 README.md
 pyproject.toml
 requirements.txt
+src/app/__init__.py
+src/app/lambda_handler.py
 src/ml_model_titanic.egg-info/PKG-INFO
 src/ml_model_titanic.egg-info/SOURCES.txt
 src/ml_model_titanic.egg-info/dependency_links.txt
 src/ml_model_titanic.egg-info/requires.txt
 src/ml_model_titanic.egg-info/top_level.txt
+src/model/generate_artfacts.py
+src/utils/transformer.py
