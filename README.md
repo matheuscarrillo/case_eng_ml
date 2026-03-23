@@ -18,3 +18,19 @@
    - O método DELETE deve deletar o passageiro com o ID informado;
 3. Disponibilizar os arquivos de IaC (Terraform) no repositório, assim como o contrato OpenAPI e o código da função Lambda;
 4. Você possui o prazo de 7 dias corridos para entrega do case, uma vez recebido o link para este repositório;
+
+
+1. Configuração do ambiente usando o .toml
+2. Construção do pipeline do modelo
+3. Construção do código python para execução em lambda 
+4. Criação de imagem docker
+  - docker build -t model-lambda .
+5. Teste da imagem:
+  ```bash
+    docker run -p 9000:8080 model-lambda
+    
+    # Teste da imagem em outro terminal.
+    curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations" -d @event.json
+  ```
+6. Entrendimento da OpenAPI 3.0 (Swagger)
+  - OpenAPI = “documento que explica exatamente como sua API funciona”
