@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+requirements.txt
+src/ml_model_titanic.egg-info/PKG-INFO
+src/ml_model_titanic.egg-info/SOURCES.txt
+src/ml_model_titanic.egg-info/dependency_links.txt
+src/ml_model_titanic.egg-info/requires.txt
+src/ml_model_titanic.egg-info/top_level.txt
