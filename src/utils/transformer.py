@@ -14,10 +14,13 @@ def criar_sobrevivente(event, table, pipe):
 
         result = {
             "PassengerId": item["PassengerId"],
-            "probabilidade_sobrevivencia": pred
+            "probabilidade_sobrevivencia": str(round(float(pred["output"]), 2))
         }
 
-        # salvar no DynamoDB (depois)
+        table.put_item(
+            Item=result
+        )
+        
         results.append(result)
 
     return {
@@ -30,7 +33,7 @@ def listar_sobreviventes(table):
 
     return {
         "statusCode": 200,
-        "body": json.dumps(response.get("Items", []))
+        "body": json.dumps(response.get("Items", []), default=str)
     }
 
 def buscar_por_id(event, table):
@@ -45,12 +48,12 @@ def buscar_por_id(event, table):
     if not item:
         return {
             "statusCode": 404,
-            "body": json.dumps({"error": "Não encontrado"})
+            "body": json.dumps({"error": "Unknown PassengerId"})
         }
 
     return {
         "statusCode": 200,
-        "body": json.dumps(item)
+        "body": json.dumps(item, default=str)
     }
 
 def deletar(event, table):

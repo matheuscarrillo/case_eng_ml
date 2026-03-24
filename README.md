@@ -48,7 +48,7 @@
 X. Subida do lambda via terraform
   - terraform apply -target=aws_lambda_function.lambda
 
-  
-X. Criar ajuste do do código para escrever no dynamo cada chamada.
 11. Construção do Terraform de subida de Dynamo.
+X. Criar ajuste do do código para escrever no dynamo cada chamada.
+
 10. Construção do Terraform de subida de API GetWay

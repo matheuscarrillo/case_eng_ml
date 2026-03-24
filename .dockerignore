@@ -1,0 +1,48 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ambientes virtuais
+.env_*
+.env
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Terraform
+.terraform/
+terraform.*
+*.tfstate
+*.tfstate.backup
+
+# Logs
+*.log
+
+# Notebooks
+*.ipynb
+
+# Dados grandes (se tiver)
+data/
+datasets/
+
+# Arquivos temporários
+tmp/
+temp/
+
+# IDEs
+.vscode/
+.idea/
+
+# Cache pip
+pip-wheel-metadata/
+
+
+src/terraform/
+src/terraform/.terraform*
