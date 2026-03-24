@@ -2,6 +2,10 @@ provider "aws" {
   region = var.region
 }
 
+data "aws_lambda_function" "lambda" {
+  function_name = "ml-api"
+}
+
 # ---------------------------
 # API Gateway (OpenAPI)
 # ---------------------------
@@ -10,7 +14,7 @@ resource "aws_api_gateway_rest_api" "api" {
 
   body = templatefile("${path.module}/openapi.yaml", {
     region      = var.region
-    lambda_arn  = aws_lambda_function.lambda.arn
+    lambda_arn  = data.aws_lambda_function.lambda.arn
   })
 }
 
@@ -33,6 +37,6 @@ resource "aws_api_gateway_stage" "stage" {
 resource "aws_lambda_permission" "apigw" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.lambda.function_name
+  function_name = data.aws_lambda_function.lambda.function_name
   principal     = "apigateway.amazonaws.com"
 }

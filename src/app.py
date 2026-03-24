@@ -28,7 +28,11 @@ import pickle
 import os
 import boto3
 from utils.transformer import JsonToDF, FeatureEngineering, Model, buscar_por_id, listar_sobreviventes, criar_sobrevivente, deletar
+import logging
 
+# Configuração básica do logger
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "model", "pipeline_model.pkl")
 
 with open(MODEL_PATH, "rb") as f:
@@ -38,50 +42,26 @@ dynamodb = boto3.resource("dynamodb", region_name="sa-east-1")
 table = dynamodb.Table("sobreviventes")
 
 
-# def lambda_handler(event, context):
-#     try:
-#         body = json.loads(event.get("body", "{}"))
-#         data = body.get("data")
-
-#         if not data:
-#             return {
-#                 "statusCode": 400,
-#                 "body": json.dumps({"error": "Json inválido - campo 'data' ausente"})
-#             }
-
-#         prediction = pipe.predict(data)
-
-#         return {
-#             "statusCode": 200,
-#             "body": json.dumps({
-#                 "prediction": prediction
-#             })
-#         }
-
-#     except Exception as e:
-#         return {
-#             "statusCode": 500,
-#             "body": json.dumps({
-#                 "error": str(e)
-#             })
-#         }
-
-
 def lambda_handler(event, context):
 
     method = event.get("httpMethod")
     path = event.get("path")
+    logger.info(f"Recebendo requisição: {method} {path}")
 
     if method == "POST" and path == "/sobreviventes":
+        logger.info("Scorando a probabilidade de sobrevivência e criando um novo sobrevivente")
         return criar_sobrevivente(event, pipe=pipe, table=table)
 
     elif method == "GET" and path == "/sobreviventes":
+        logger.info("Listando sobreviventes")
         return listar_sobreviventes(table=table)
 
     elif method == "GET" and path.startswith("/sobreviventes/"):
+        logger.info("Buscando sobrevivente por ID")
         return buscar_por_id(event, table=table)
 
     elif method == "DELETE" and path.startswith("/sobreviventes/"):
+        logger.info("Deletando sobrevivente por ID")
         return deletar(event, table=table)
 
     return {

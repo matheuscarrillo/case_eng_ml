@@ -60,7 +60,7 @@ paths:
                   PassengerId:
                     type: integer
                   probabilidade_sobrevivencia:
-                    type: number
+                    type: string
 
         "400":
           description: Requisição inválida
@@ -69,8 +69,7 @@ paths:
           description: Erro interno
 
       x-amazon-apigateway-integration:
-        uri: 
-          Fn::Sub: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations
+        uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations"
         httpMethod: POST
         type: aws_proxy
 
@@ -91,11 +90,10 @@ paths:
                     PassengerId:
                       type: integer
                     probabilidade_sobrevivencia:
-                      type: number
+                      type: string
 
       x-amazon-apigateway-integration:
-        uri: 
-          Fn::Sub: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations
+        uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations"
         httpMethod: POST
         type: aws_proxy
 
@@ -121,14 +119,13 @@ paths:
                   PassengerId:
                     type: integer
                   probabilidade_sobrevivencia:
-                    type: number
+                    type: string
 
         "404":
           description: Passageiro não encontrado
 
       x-amazon-apigateway-integration:
-        uri: 
-          Fn::Sub: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations
+        uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations"
         httpMethod: POST
         type: aws_proxy
 
@@ -150,7 +147,6 @@ paths:
           description: Passageiro não encontrado
 
       x-amazon-apigateway-integration:
-        uri: 
-          Fn::Sub: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations
+        uri: "arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/${lambda_arn}/invocations"
         httpMethod: POST
         type: aws_proxy
