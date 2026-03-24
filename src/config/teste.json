@@ -1,0 +1,31 @@
+
+{
+    "data": [
+        {
+            "PassengerId": 123,
+            "Pclass": 3,
+            "Name": "Lievens, Mr. Rene Aime",
+            "Sex": "male",
+            "Age": 88.0,
+            "SibSp": 0,
+            "Parch": 0,
+            "Ticket": "345781",
+            "Fare": 9.5,
+            "Cabin": null,
+            "Embarked": "S"
+        },
+        {
+            "PassengerId": 234,
+            "Pclass": 3,
+            "Name": "Ford, Mrs. Edward (Margaret Ann Watson)",
+            "Sex": "female",
+            "Age": 48.0,
+            "SibSp": 0,
+            "Parch": 2,
+            "Ticket": "W.C. 6608",
+            "Fare": 34.375,
+            "Cabin": null,
+            "Embarked": "S"
+        }
+    ]
+}

@@ -2,8 +2,20 @@
   "httpMethod": "POST",
   "path": "/sobreviventes",
   "body": "{\"data\": [{\"PassengerId\": 771, \"Pclass\": 3, \"Name\": \"Teste\", \"Sex\": \"male\", \"Age\": 24, \"SibSp\": 0, \"Parch\": 0, \"Ticket\": \"123\", \"Fare\": 10, \"Cabin\": null, \"Embarked\": \"S\"},{\"PassengerId\": 771, \"Pclass\": 3, \"Name\": \"Teste\", \"Sex\": \"male\", \"Age\": 24, \"SibSp\": 0, \"Parch\": 0, \"Ticket\": \"123\", \"Fare\": 10, \"Cabin\": null, \"Embarked\": \"S\"}]}"
-}
+},
 {
   "httpMethod": "GET",
   "path": "/sobreviventes"
+},
+{
+  "httpMethod": "GET",
+  "path": "/sobreviventes/",
+  "pathParameters":{"id":"123"}
+},
+{
+  "httpMethod": "DELETE",
+  "path": "/sobreviventes/",
+  "pathParameters":{"id":"123"}
 }
+
+
