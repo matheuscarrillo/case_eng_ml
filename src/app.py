@@ -26,37 +26,65 @@
 import json
 import pickle
 import os
+import boto3
+from utils.transformer import JsonToDF, FeatureEngineering, Model, buscar_por_id, listar_sobreviventes, criar_sobrevivente, deletar
 
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "model", "pipeline_model.pkl")
 
 with open(MODEL_PATH, "rb") as f:
     pipe = pickle.load(f)
 
+dynamodb = boto3.resource("dynamodb", region_name="sa-east-1")
+table = dynamodb.Table("sobreviventes")
+
+
+# def lambda_handler(event, context):
+#     try:
+#         body = json.loads(event.get("body", "{}"))
+#         data = body.get("data")
+
+#         if not data:
+#             return {
+#                 "statusCode": 400,
+#                 "body": json.dumps({"error": "Json inválido - campo 'data' ausente"})
+#             }
+
+#         prediction = pipe.predict(data)
+
+#         return {
+#             "statusCode": 200,
+#             "body": json.dumps({
+#                 "prediction": prediction
+#             })
+#         }
+
+#     except Exception as e:
+#         return {
+#             "statusCode": 500,
+#             "body": json.dumps({
+#                 "error": str(e)
+#             })
+#         }
+
 
 def lambda_handler(event, context):
-    try:
-        body = json.loads(event.get("body", "{}"))
-        data = body.get("data")
 
-        if not data:
-            return {
-                "statusCode": 400,
-                "body": json.dumps({"error": "Json inválido - campo 'data' ausente"})
-            }
+    method = event.get("httpMethod")
+    path = event.get("path")
 
-        prediction = pipe.predict(data)
+    if method == "POST" and path == "/sobreviventes":
+        return criar_sobrevivente(event, pipe=pipe, table=table)
 
-        return {
-            "statusCode": 200,
-            "body": json.dumps({
-                "prediction": prediction
-            })
-        }
+    elif method == "GET" and path == "/sobreviventes":
+        return listar_sobreviventes(table=table)
 
-    except Exception as e:
-        return {
-            "statusCode": 500,
-            "body": json.dumps({
-                "error": str(e)
-            })
-        }
+    elif method == "GET" and path.startswith("/sobreviventes/"):
+        return buscar_por_id(event, table=table)
+
+    elif method == "DELETE" and path.startswith("/sobreviventes/"):
+        return deletar(event, table=table)
+
+    return {
+        "statusCode": 404,
+        "body": "Rota não encontrada"
+    }

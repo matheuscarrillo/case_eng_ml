@@ -13,11 +13,7 @@
                 "Fare": 9.5,
                 "Cabin": null,
                 "Embarked": "S"
-            }
-        ]
-    },
-    {
-        "data": [
+            },
             {
                 "PassengerId": 737,
                 "Pclass": 3,
@@ -30,11 +26,7 @@
                 "Fare": 34.375,
                 "Cabin": null,
                 "Embarked": "S"
-            }
-        ]
-    },
-    {
-        "data": [
+            },
             {
                 "PassengerId": 429,
                 "Pclass": 3,
@@ -47,11 +39,7 @@
                 "Fare": 7.75,
                 "Cabin": null,
                 "Embarked": "Q"
-            }
-        ]
-    },
-    {
-        "data": [
+            },
             {
                 "PassengerId": 877,
                 "Pclass": 3,
