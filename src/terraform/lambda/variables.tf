@@ -9,3 +9,7 @@ variable "lambda_name" {
 variable "ecr_repo_name" {
   default = "ml-lambda"
 }
+
+variable "version_image" {
+  default = "v0.0.5"
+}

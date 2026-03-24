@@ -31,7 +31,7 @@ resource "aws_iam_role" "lambda_exec" {
 # Lambda (ECR)
 # ---------------------------
 locals {
-  image_uri = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.ecr_repo_name}:latest"
+  image_uri = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.region}.amazonaws.com/${var.ecr_repo_name}:${var.version_image}"
 }
 
 resource "aws_lambda_function" "lambda" {
