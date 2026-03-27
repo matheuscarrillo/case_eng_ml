@@ -11,5 +11,5 @@ variable "ecr_repo_name" {
 }
 
 variable "version_image" {
-  default = "v0.0.5"
+  default = "v0.0.6"
 }
