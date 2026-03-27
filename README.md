@@ -152,3 +152,17 @@ Rotas para chamada da API:
 ```
 
 ![Imagem](./images/Response.png)
+
+## 9. Teste de latência
+
+### 9.1 Chamadas Únicas
+<img src="./images/latency_distribution_onerequest.png" width="700"/>
+
+Realizei um teste de latência com 100 chamadas em série, com a finalidade de avaliar a performance da API. Para essas, foi medido o P90 e o P99. A imagem demonstra a latência para as requisições.
+
+### 9.2 Chamadas Enfileiradas
+![Imagem](./images/latency_parallel.png)
+
+O teste de latência foi realizado para a chamada POST (modelo), utilizando a função ThreadPoolExecutor. Basicamente ela enfileira X requisições (no caso setei em 10k) com X requisições em concorrência (setei 200). Ao finalizar as primeiras, executa as próximas.
+
+O grafico de latência indica que, 99% das requisições tiveram latência de até 6 segundos. Dependendo para o que será utilizado, pode ser necessário uma mudança na infraestrutura para melhoria de latência.
