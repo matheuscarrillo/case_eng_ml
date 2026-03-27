@@ -25,7 +25,7 @@
 O objetivo do projeto é construir um sistema que tenha disponível 4 rotas, sendo uma POST de chamada de um modelo de Machine Learning, onde a partir de um payload, recebo a probabilidade e o id do passageiro. Outras 2 rotas de consumo do DynamoDB, uma para listagem de passageiros e outra para pesquisa de um único passageiro. E por fim, teremos uma rota para deletar passageiros através do ID.
 
 O projeto é seguido pela seguinte arquitetura:
-![Imagem](./images/diagrama_projeto.jpg)
+![Imagem](./images/diagrama_projeto_.jpg)
 
 ## 1. Configuração do ambiente usando o .toml
 Construção da ENV:
@@ -63,7 +63,7 @@ Teste da imagem:
     curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations/sobreviventes" -d @event.json
   ```
 
-![Imagem](./images/Docker_Image.png)
+![Imagem](./images/Docker_Image_.png)
 
 ## 5. Construção do Terraform de subida de lambda no ECR
 Um dos requisito é que todos as implementações sejam em IaC. Escolhi o método via terraform.
@@ -95,7 +95,7 @@ Executar a implementação no docker:
   # Esse comando irá subir o script no ECR
   docker push 123687089814.dkr.ecr.sa-east-1.amazonaws.com/ml-lambda:{versao}
 ```
-![Imagem](./images/Ecr.png)
+![Imagem](./images/Ecr_.png)
 
 ## 6. Subida do lambda via terraform
 Criação da lambda:
@@ -113,7 +113,7 @@ Atualização da imagem (caso seja a partir do segundo commit):
       terraform apply -target=aws_lambda_function.lambda
     ```
 
-![Imagem](./images/Lambda.png)
+![Imagem](./images/LambdaHandler.png)
 
 ## 7. Construção do Terraform de subida de Dynamo.
 O Dynamo, será o responsável por armazenar os resultados gerados pelo método POST da lambda.
@@ -124,14 +124,14 @@ O Dynamo, será o responsável por armazenar os resultados gerados pelo método 
     terraform apply
   ```
 
-![Imagem](./images/Dynamo.png)
+![Imagem](./images/DynamoDB.png)
 
 ## 8. Construção da API e API GateWay
 - OpenAPI 3.0 (Swagger)
   - É um documento que explica exatamente como a API funciona. Define tipagem, rotas e padrões de saída.
   - [OpenApi.yaml](./src/terraform/api_gateway/openapi.yaml)
 
-![Imagem](./images/API_GateWay.png)
+![Imagem](./images/API_GW.png)
 
 ### 8.1 Construção do Terraform de subida de API GateWay
 O API GateWay será responsável por fazer as chamadas do lambda de forma externa. Essa API pode ser consumida por outros sistemas.
@@ -151,4 +151,4 @@ Rotas para chamada da API:
   - curl -X DELETE "https://2ycz4yvc4h.execute-api.sa-east-1.amazonaws.com/dev/sobreviventes/123"
 ```
 
-![Imagem](./images/Chamadas.png)
+![Imagem](./images/Response.png)
